@@ -66,9 +66,11 @@ func findApplication(appName string) (application *Application, err error) {
 	pathIndex := re.SubexpIndex("path")
 	packageIndex := re.SubexpIndex("package")
 
+	re = regexp.MustCompile(`\r?`)
+
 	return &Application{
 		apkPath:     match[pathIndex],
-		packageName: match[packageIndex],
+		packageName: re.ReplaceAllString(match[packageIndex], ""),
 	}, nil
 }
 

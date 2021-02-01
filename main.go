@@ -17,13 +17,13 @@ type Application struct {
 }
 
 func main() {
-	executablePath, err := os.Executable()
+	workingDirectory, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	app := flag.String("app", "", "Target application name")
-	out := flag.String("out", filepath.Dir(executablePath), "Output directory for apk file")
+	out := flag.String("out", workingDirectory, "Output directory for apk file")
 
 	flag.Parse()
 
